@@ -1,13 +1,18 @@
 # Atlas Search & Hugging Face transformers
 
-This repo wants to be an easy way to showcase how to leverage [Hugging Face] (https://huggingface.co/) transformers in [Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/). In this example we show how to build multi dimensional vectors starting from text using the Hugging face library and the [sentence-transformers models] (https://www.sbert.net/), how to build Atlas Search indexes for vector search and then how to leverage those vectors to get more relevant results. In particular we will show how to use those vectors for implementing recommendation systems (similar to the the moreLikeTis operator) and for increasing the effectiveness of the sesrch system without having to manually define synonyms.
+This repo wants to be an easy way to showcase how to leverage [Hugging Face](https://huggingface.co/) transformers in [Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/). In this example we show how to build multi dimensional vectors starting from text using the Hugging face library and the [sentence-transformers models](https://www.sbert.net/), how to build Atlas Search indexes for vector search and then how to leverage those vectors to get more relevant results. In particular we will show how to use those vectors for implementing recommendation systems (similar to the the moreLikeTis operator) and for increasing the effectiveness of the sesrch system without having to manually define synonyms.
 
 
 <a id="AtlasCluster"></a>
 
-## Atlas Cluster
+## Load sample data
 
-To follow along with the demo, you will need to create a MongoDB Atlas cluster and load the sample data set into your cluster.
+To follow along with the demo, you will need to create a MongoDB Atlas cluster and load the sample data set into your cluster. We assume you have a csv file with the data you want to use. For this example we wil leverage the sample_mflix.movies collection part of the sample dataset available in MongoDB Atlas. For simplicity we have defined a csv file with just the `fullplot`, `title` and `_id` fields.
+
+![csv](/docs/csv.png?raw=true "csv")
+
+
+
 Please create an account on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register) and follow the instructions.
 If it is the first time you use Atlas you will need to create an organization and a project. After you complete the account setup, you will see the **Atlas UI**. If you don not have any cluster click the **Build a Database** button.
 
