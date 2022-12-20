@@ -55,7 +55,7 @@ To do so we need to paste the fullplot field of the movie we are interested in t
 The pipeline used to compute the results looks like: 
 
 ```json
-{
+[{
     "$search": {
         "index": "vector_search_index",
         "knnBeta": {
@@ -69,11 +69,11 @@ The pipeline used to compute the results looks like:
     "$project": {
         "vector": 0,
         "_id": 0,
-        'score': {
-            '$meta': 'searchScore'
+        "score": {
+            "$meta": "searchScore"
         }
     }
-}
+}]
 ```
 
 We can then run `vector-search.py` with:
