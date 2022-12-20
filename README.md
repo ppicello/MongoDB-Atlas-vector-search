@@ -98,7 +98,7 @@ For this second example we are going to issue a query for the word `automobile`.
 query_encoding = model.encode("automobile").tolist()
 ```
 ```console
-python3 vector-search.py
+python3 vector_search.py
 ```
 
 And if we look at the results we can see that we got results with the words `cars` or `auto` or `camper` but no documents actually contain the word `automobile` and we did not perform any explicit synonyms definition.
