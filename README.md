@@ -103,4 +103,4 @@ python3 vector-search.py
 
 And if we look at the results we can see that we got results with the words `cars` or `auto` or `camper` but no documents actually contain the word `automobile` and we did not perform any explicit synonyms definition.
 
-![results1](/docs/results1.png?raw=true "results1")
+![results2](/docs/results2.png?raw=true "results2")
