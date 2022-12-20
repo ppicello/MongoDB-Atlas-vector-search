@@ -1,16 +1,47 @@
 # Atlas Search & Hugging Face transformers
 
-This repo wants to be an easy way to showcase how to leverage [Hugging Face](https://huggingface.co/) transformers in [Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/). In this example we show how to build multi dimensional vectors starting from text using the Hugging face library and the [sentence-transformers models](https://www.sbert.net/), how to build Atlas Search indexes for vector search and then how to leverage those vectors to get more relevant results. In particular we will show how to use those vectors for implementing recommendation systems (similar to the the moreLikeTis operator) and for increasing the effectiveness of the sesrch system without having to manually define synonyms.
+This repo wants to be an easy way to showcase how to leverage [Hugging Face](https://huggingface.co/) transformers in [Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/). In this example we show how to build multi dimensional vectors starting from text using the Hugging face library and the [sentence-transformers models](https://www.sbert.net/), how to build Atlas Search indexes for vector search and then how to leverage those vectors to get more relevant results. In particular we will show how to use those vectors for implementing recommendation systems (similar to the the `moreLikeTis` operator) and for increasing the effectiveness of the sesrch system without having to manually define synonyms.
 
 
 <a id="AtlasCluster"></a>
 
 ## Load sample data
 
-To follow along with the demo, you will need to create a MongoDB Atlas cluster and load the sample data set into your cluster. We assume you have a csv file with the data you want to use. For this example we wil leverage the sample_mflix.movies collection part of the sample dataset available in MongoDB Atlas. For simplicity we have defined a csv file with just the `fullplot`, `title` and `_id` fields.
+To follow along with the demo, you will need to create a MongoDB Atlas cluster and load the sample data set into your cluster. We assume you have a csv file with the data you want to use. For this example we wil leverage the sample_mflix.movies collection part of the sample dataset available in MongoDB Atlas. For simplicity we have defined a csv file with just the `fullplot`, `title` and `_id` fields. You can find an example of the csv document as part of this project.
 
 ![csv](/docs/csv.png?raw=true "csv")
 
+Once you have your csv file ready you need to update the MongoDB Atlas uri in `encoder.py`. Once you have updated the file with your MongoDB Atlas uri you are ready to execute `encoder.py`. This file will leverage the Hugging Face [sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2](sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2) model for generating a 384 dimensional vector starting from the `fullplot` field for each movie. The document will be then loaded in MongoDB Atlas in the `vector_search.movies_vector` collection.
+
+```console
+python3 encoder.py
+```
+
+You will end up with a collection that looks like this.
+
+![collection](/docs/collection.png?raw=true "collection")
+
+## Define Atlas Search Index
+
+Create the following search index on the collection that you configured in the config file:
+
+```json
+{
+  "mappings": {
+    "fields": {
+      "vector": [
+        {
+          "dimensions": 384,
+          "similarity": "cosine",
+          "type": "knnVector"
+        }
+      ]
+    }
+  }
+}
+```
+
+![index](/docs/vector_search_index.png?raw=true "index")
 
 
 Please create an account on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register) and follow the instructions.
