@@ -1,5 +1,7 @@
 # Atlas Search & Hugging Face transformers
 
+![header](/docs/header.png?raw=true "header")
+
 This repo wants to be an easy way to showcase how to leverage [Hugging Face](https://huggingface.co/) transformers in [Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/). In this example we show how to build multi dimensional vectors starting from text using the Hugging face library and the [sentence-transformers models](https://www.sbert.net/), how to build Atlas Search indexes for vector search and then how to leverage those vectors to get more relevant results. In particular we will show how to use those vectors for implementing recommendation systems (similar to the the `moreLikeTis` operator) and for increasing the effectiveness of the search system without having to manually define synonyms.
 
 
