@@ -1,6 +1,6 @@
 # Atlas Search & Hugging Face transformers
 
-This repo wants to be an easy way to showcase how to leverage [Hugging Face](https://huggingface.co/) transformers in [Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/). In this example we show how to build multi dimensional vectors starting from text using the Hugging face library and the [sentence-transformers models](https://www.sbert.net/), how to build Atlas Search indexes for vector search and then how to leverage those vectors to get more relevant results. In particular we will show how to use those vectors for implementing recommendation systems (similar to the the `moreLikeTis` operator) and for increasing the effectiveness of the sesrch system without having to manually define synonyms.
+This repo wants to be an easy way to showcase how to leverage [Hugging Face](https://huggingface.co/) transformers in [Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/). In this example we show how to build multi dimensional vectors starting from text using the Hugging face library and the [sentence-transformers models](https://www.sbert.net/), how to build Atlas Search indexes for vector search and then how to leverage those vectors to get more relevant results. In particular we will show how to use those vectors for implementing recommendation systems (similar to the the `moreLikeTis` operator) and for increasing the effectiveness of the search system without having to manually define synonyms.
 
 
 <a id="AtlasCluster"></a>
@@ -41,28 +41,54 @@ Create the following search index on the collection that you configured in the c
 }
 ```
 
+Your index should look like this: 
+
 ![index](/docs/vector_search_index.png?raw=true "index")
 
+We can then run `vector-search.py` with:
 
-Please create an account on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register) and follow the instructions.
-If it is the first time you use Atlas you will need to create an organization and a project. After you complete the account setup, you will see the **Atlas UI**. If you don not have any cluster click the **Build a Database** button.
+```console
+python3 vector-search.py
+```
 
-In the following dialog select **Shared** and click **Create**.
-The following screen will provide an interface to configure the cluster.
+And if we look at the results we can see that the first result is exactly the same document, and we have a score of 1.0, and then we have other "related" movies, ranked by their score.
 
-If you choose a region other than Frankfurt you will need to update the endpoint in the app in `.env.local` to match the region.
+![results1](/docs/results1.png?raw=true "results1")
 
-Here are the settings for the cluster:
 
--   **Cloud Provider & Region**: `AWS, Frankfurt (eu-central-1)`
--   **Cluster Tier**: `MO Sandbox (Shared RAM, 512 MB Storage)`
--   **Cluster Name**: `Cluster0`
+## Test 1: Similarity Search
 
-![Atlas Cluster](/docs/create-shared-cluster.png?raw=true "Atlas Cluster")
+The first capability we want to showcase is the ability to leverage these vectors for similarity search. In this example we want to find movies "similar" to others starting from the description contained in the `fullplot` field. This capability could be leveraged for example in a movie catalog app  to provide the end user with "related" movies.
 
-<a id="LoadSampleData"></a>
+To do so we need to paste the fullplot field of the movie we are interested in the `vector.seatc.py` file. 
 
-### Load Sample Data
+The pipeline used to compute the results looks like: 
+
+```json
+{
+    "$search": {
+        "index": "vector_search_index",
+        "knnBeta": {
+            "vector": query_encoding,
+            "path": "vector",
+            "k": 10
+        }
+    }
+},
+{
+    "$project": {
+        "vector": 0,
+        "_id": 0,
+        'score': {
+            '$meta': 'searchScore'
+        }
+    }
+}
+```
+
+## Test 2: Relevant results without manually defining synonyms
+
+
 
 After your cluster was deployed in the region of your choice, you will need to load the sample data set into your cluster.
 Click the three dots menu in the top headline of the cluster card.
