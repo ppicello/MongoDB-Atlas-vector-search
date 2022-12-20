@@ -15,7 +15,7 @@ movies_vector_collection.delete_many({}) # make sure the target collection is em
 # define transofrmer model (from https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2)
 model = SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2')
 
-# load sample data. We are loading a cvs with the following columns: fullplot, title, _id. (from https://www.mongodb.com/docs/atlas/sample-data/)
+# load sample data. We are loading a csv with the following columns: fullplot, title, _id. (from https://www.mongodb.com/docs/atlas/sample-data/)
 file = open('/Users/paolopicello/movies_data.csv')
 csvreader = csv.reader(file)
 

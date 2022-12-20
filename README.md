@@ -78,10 +78,10 @@ The pipeline used to compute the results looks like:
 }]
 ```
 
-We can then run `vector-search.py` with:
+We can then run `vector_search.py` with:
 
 ```console
-python3 vector-search.py
+python3 vector_search.py
 ```
 
 And if we look at the results we can see that the first result is exactly the same document, and we have a score of 1.0, and then we have other "related" movies, ranked by their score.
