@@ -9,7 +9,7 @@ This repo wants to be an easy way to showcase how to leverage [Hugging Face](htt
 
 ## Load sample data
 
-To follow along with the example, you will need to create a MongoDB Atlas cluster and load the sample data set into your cluster. We assume you have a csv file with the data you want to use. For this example we wil leverage the sample_mflix.movies collection part of the sample dataset available in MongoDB Atlas. For simplicity we have defined a csv file with just the `fullplot`, `title` and `_id` fields. You can find an example of the csv document as part of this project.
+To follow along with the example, you will need to create a MongoDB Atlas cluster and load the sample data set into your cluster. We assume you have a csv file with the data you want to use. For this example we wil leverage the `vector_search.movies_vector` collection part of the sample dataset available in MongoDB Atlas. For simplicity we have defined a csv file with just the `fullplot`, `title` and `_id` fields. You can find an example of the csv document as part of this project.
 
 ![csv](/docs/csv.png?raw=true "csv")
 
