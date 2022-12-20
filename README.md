@@ -13,7 +13,7 @@ To follow along with the demo, you will need to create a MongoDB Atlas cluster a
 
 ![csv](/docs/csv.png?raw=true "csv")
 
-Once you have your csv file ready you need to update the MongoDB Atlas uri in `encoder.py`. Once you have updated the file with your MongoDB Atlas uri you are ready to execute `encoder.py`. This file will leverage the Hugging Face [sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2](sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2) model for generating a 384 dimensional vector starting from the `fullplot` field for each movie. The document will be then loaded in MongoDB Atlas in the `vector_search.movies_vector` collection.
+Once you have your csv file ready you need to update the MongoDB Atlas uri in `encoder.py`. Once you have updated the file with your MongoDB Atlas uri you are ready to execute `encoder.py`. This file will leverage the Hugging Face [sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2) model for generating a 384 dimensional vector starting from the `fullplot` field for each movie. The document will be then loaded in MongoDB Atlas in the `vector_search.movies_vector` collection.
 
 ```console
 python3 encoder.py
