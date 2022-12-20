@@ -52,7 +52,7 @@ Your index should look like this:
 
 The first capability we want to showcase is the ability to leverage these vectors for similarity search. In this example we want to find movies "similar" to others starting from the description contained in the `fullplot` field. This capability could be leveraged for example in a movie catalog app  to provide the end user with "related" movies.
 
-To do so we need to paste the fullplot field of the movie we are interested in the `vector.seatc.py` file. 
+To do so we need to paste the fullplot field of the movie we are interested in the `vector_search.py` file. 
 
 The pipeline used to compute the results looks like: 
 
