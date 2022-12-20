@@ -21,7 +21,7 @@ python3 encoder.py
 
 You will end up with a collection that looks like this.
 
-![collection](/docs/collection.png?raw=true "collection")
+![collection](/docs/collection2.png?raw=true "collection")
 
 ## Define Atlas Search Index
 
