@@ -123,7 +123,7 @@ query = "lawyer"
 
 As we can expect we get back movies related to lawyers. 
 
-But let's try with different langauges.
+But let's try with different languages.
 
 ```python
 # italian
