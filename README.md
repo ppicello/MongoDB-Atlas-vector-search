@@ -128,7 +128,7 @@ But let's try with different langauges.
 Italian:
 ```python
 # italian
-query = "lawyer"
+query = "avvocato"
 ```
 ```python
 # french
@@ -148,4 +148,5 @@ As you can see from the image below, we get relevant results even if all this wo
 ![lawyer](/docs/lawyer.png?raw=true "lawyer")
 
 > **Note**
+>
 > In this case this multi-language capability is part of the model used and not really related to Atlas Search, Atlas Search is used to perform the multidimensional search once the encodings are computed by the model. In a real case scenario you could choose between using a pre-trained model (like in this example), fine-tune an existing model, or train and bring your own models. 
