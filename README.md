@@ -104,3 +104,42 @@ python3 vector_search.py
 And if we look at the results we can see that we got results with the words `cars` or `auto` or `camper` but no documents actually contain the word `automobile` and we did not perform any explicit synonyms definition.
 
 ![results2](/docs/results2.png?raw=true "results2")
+
+## Test 3: Multi-Lingual Search
+
+One of the coolest things of the model we are using for this example is that it is a multi-lingual model, meaning that similar inputs in different languages are mapped close in vector space. This model in particular is trained with more than 50 languages. So what this means for your application is that you could be able to support multi language search without configuring anything. 
+
+Let's for example search for lawyers related movies 
+
+```python
+query = "lawyer"
+```
+
+As we can expect we get back movies related to lawyers. 
+
+But let's try with different langauges.
+
+Italian:
+```python
+# italian
+query = "lawyer"
+```
+```python
+# french
+query = "juriste"
+```
+```python
+# german
+query = "Rechtsanwalt"
+```
+```python
+# spanish
+query = "abogado"
+```
+
+As you can see from the image below, we get relevant results even if all this words never appear in our data and we only have english data. You can play around with different languages and you will get similar results.
+
+![lawyer](/docs/lawyer.png?raw=true "lawyer")
+
+> **Note**
+> In this case this multi-language capability is part of the model used and not really related to Atlas Search, Atlas Search is used to perform the multidimensional search once the encodings are computed by the model. In a real case scenario you could choose between using a pre-trained model (like in this example), fine-tune an existing model, or train and bring your own models. 
