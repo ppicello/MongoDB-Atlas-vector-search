@@ -4,6 +4,9 @@
 
 This repo wants to be an easy way to showcase how to leverage [Hugging Face](https://huggingface.co/) transformers in [Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/). In this example we show how to build multi dimensional vectors starting from text using the Hugging face library and the [sentence-transformers models](https://www.sbert.net/), how to build Atlas Search indexes for vector search and then how to leverage those vectors to get more relevant results. In particular we will show how to use those vectors for implementing recommendation systems (similar to the the `moreLikeThis` operator) and for increasing the effectiveness of the search system without having to manually define synonyms.
 
+1. [Test 1: Similarity Search](#test1)
+2. [Test 2: Relevant results without manually defining synonyms](#test2)
+3. [Test 3: Multi-Lingual Search](#test3)
 
 <a id="AtlasCluster"></a>
 
@@ -47,6 +50,7 @@ Your index should look like this:
 
 ![index](/docs/vector_search_index.png?raw=true "index")
 
+<a id="test1"></a>
 ## Test 1: Similarity Search
 
 
@@ -88,6 +92,7 @@ And if we look at the results we can see that the first result is exactly the sa
 
 ![results1](/docs/results1.png?raw=true "results1")
 
+<a id="test2"></a>
 ## Test 2: Relevant results without manually defining synonyms
 
 The second capability we want to showcase here is the ability of the model of detecting synonyms. Words with the same "meaning" will in fact be encoded closer in the vector space. In a search engine like Atlas Search we can use this feature to increase the effectiveness of our search results.
@@ -105,6 +110,7 @@ And if we look at the results we can see that we got results with the words `car
 
 ![results2](/docs/results2.png?raw=true "results2")
 
+<a id="test3"></a>
 ## Test 3: Multi-Lingual Search
 
 One of the coolest things of the model we are using for this example is that it is a multi-lingual model, meaning that similar inputs in different languages are mapped close in vector space. This model in particular is trained with more than 50 languages. So what this means for your application is that you could be able to support multi language search without configuring anything. 
