@@ -18,13 +18,12 @@ query_encoding = model.encode(query).tolist()
 
 pipeline = [
     {
-        "$search": {
+        "$vectorSearch": {
             "index": "vector_search_index",
-            "knnBeta": {
-                "vector": query_encoding,
-                "path": "vector",
-                "k": 10
-            }
+            "path": "vector",
+            "queryVector": query_encoding,
+            "numcandidates": 100,
+            "limit": 10
         }
     },
     {
@@ -32,7 +31,7 @@ pipeline = [
             "vector": 0,
             "_id": 0,
             'score': {
-                '$meta': 'searchScore'
+                '$meta': 'vectorSearchScore'
             }
         }
     }
